@@ -699,20 +699,16 @@
       .hero-actions{
         flex-direction:column;
       }
-  html, body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: white;
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
 
   background: 
     linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
     url('background.jpg') center center / cover no-repeat;
 
-  background-attachment: fixed;
+  z-index: -9999;
 }
   </style>
 </head>
