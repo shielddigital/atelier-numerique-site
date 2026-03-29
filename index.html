@@ -700,27 +700,24 @@
         flex-direction:column;
       }
 }
-    .hero{ 
-  position:relative;
-  padding:72px 0 38px;
-  overflow:hidden;
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
+body{
+  font-family: Arial, Helvetica, sans-serif;
   background:
-    linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.82)),
-    url('background.jpg') center center / cover no-repeat;
-  filter: blur(2px);
-  transform: scale(1.04);
-  z-index:0;
+    linear-gradient(rgba(0,0,0,.78), rgba(0,0,0,.86)),
+    url('background.jpg') center center / cover no-repeat fixed;
+  color:var(--text);
+  line-height:1.5;
+  overflow-x:hidden;
 }
 
-.hero > .container{
-  position:relative;
-  z-index:1;
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  backdrop-filter: blur(4px);
+  background: rgba(0,0,0,0.3);
+  pointer-events:none;
+  z-index:0;
 }
   </style>
 </head>
