@@ -1,116 +1,590 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Atelier Numérique</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:Inter, sans-serif;
-  background:#05030a;
-  color:#fff;
-}
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:40px 20px;
-}
-h1{
-  font-size:clamp(2.5rem,6vw,4rem);
-  line-height:1.1;
-  font-weight:900;
-}
-.highlight{
-  color:#a855f7;
-}
-p{
-  color:rgba(255,255,255,0.7);
-  margin-top:20px;
-  font-size:1.1rem;
-  line-height:1.6;
-}
-.btn{
-  display:inline-block;
-  margin-top:30px;
-  padding:16px 24px;
-  background:#a855f7;
-  color:#fff;
-  border-radius:12px;
-  font-weight:700;
-}
-.section{
-  margin-top:80px;
-}
-.grid{
-  display:grid;
-  gap:20px;
-}
-.card{
-  padding:20px;
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:16px;
-}
-.price{
-  font-size:2.5rem;
-  font-weight:900;
-  margin-top:10px;
-}
-footer{
-  margin-top:100px;
-  text-align:center;
-  color:rgba(255,255,255,0.4);
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atelier Numérique</title>
+  <meta name="description" content="Je crée des sites premium, clairs et élégants qui donnent envie de te contacter." />
+  <style>
+    :root{
+      --bg:#06040b;
+      --bg2:#0d0815;
+      --card:rgba(255,255,255,.05);
+      --line:rgba(255,255,255,.10);
+      --text:#ffffff;
+      --muted:rgba(255,255,255,.68);
+      --violet:#8b5cf6;
+      --violet2:#c084fc;
+      --glow:0 0 40px rgba(139,92,246,.20);
+      --radius:24px;
+      --max:1100px;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(139,92,246,.18), transparent 24%),
+        radial-gradient(circle at 85% 15%, rgba(192,132,252,.12), transparent 20%),
+        linear-gradient(180deg, #05030a 0%, #090611 55%, #05030a 100%);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size:42px 42px;
+      mask-image:radial-gradient(circle at center, black 45%, transparent 100%);
+      z-index:0;
+    }
+
+    a{text-decoration:none;color:inherit}
+    .container{
+      width:min(var(--max), calc(100% - 28px));
+      margin:0 auto;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter:blur(16px);
+      background:rgba(6,4,11,.70);
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 0;
+      gap:18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .brand-mark{
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      letter-spacing:.08em;
+      border:1px solid rgba(139,92,246,.35);
+      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.03));
+      box-shadow:var(--glow);
+    }
+
+    .brand-text small{
+      display:block;
+      color:#e9d5ff;
+      text-transform:uppercase;
+      letter-spacing:.28em;
+      font-size:.70rem;
+      font-weight:800;
+      margin-bottom:2px;
+    }
+
+    .brand-text strong{
+      display:block;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:.98rem;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      color:var(--muted);
+      font-size:.94rem;
+    }
+
+    .nav-links a:hover{color:#fff}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:15px 22px;
+      border-radius:16px;
+      font-weight:800;
+      transition:.25s ease;
+      border:none;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+
+    .btn:hover{transform:translateY(-2px)}
+
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(90deg, var(--violet), var(--violet2));
+      box-shadow:0 14px 38px rgba(139,92,246,.28);
+    }
+
+    .btn-secondary{
+      color:#fff;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    .hero{
+      padding:86px 0 54px;
+    }
+
+    .hero-shell{
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius:34px;
+      padding:38px;
+      box-shadow:0 30px 80px rgba(0,0,0,.34);
+      backdrop-filter:blur(14px);
+    }
+
+    .hero-shell::before{
+      content:"";
+      position:absolute;
+      inset:auto -100px -120px auto;
+      width:260px;
+      height:260px;
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(139,92,246,.22), transparent 70%);
+      filter:blur(30px);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:34px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(139,92,246,.24);
+      background:rgba(255,255,255,.04);
+      color:#e9d5ff;
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      font-size:.72rem;
+      font-weight:800;
+      margin-bottom:22px;
+    }
+
+    .eyebrow::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:linear-gradient(180deg, var(--violet), var(--violet2));
+      box-shadow:0 0 16px rgba(139,92,246,.7);
+    }
+
+    h1{
+      font-size:clamp(3.1rem, 7vw, 6.4rem);
+      line-height:.92;
+      font-weight:900;
+      letter-spacing:-.05em;
+      text-transform:uppercase;
+      max-width:680px;
+    }
+
+    .gradient{
+      background:linear-gradient(90deg, #fff 0%, #d8b4fe 45%, #a78bfa 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .lead{
+      margin-top:22px;
+      max-width:610px;
+      color:var(--muted);
+      font-size:1.06rem;
+      line-height:1.9;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:30px;
+    }
+
+    .proof-row{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:28px;
+    }
+
+    .proof{
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+      border-radius:20px;
+      padding:18px;
+    }
+
+    .proof strong{
+      display:block;
+      font-size:1rem;
+      color:#f5d0fe;
+      margin-bottom:8px;
+    }
+
+    .proof span{
+      color:var(--muted);
+      font-size:.93rem;
+      line-height:1.6;
+    }
+
+    .visual-card{
+      position:relative;
+      padding:20px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      min-height:500px;
+      display:flex;
+      align-items:flex-end;
+      box-shadow:var(--glow);
+    }
+
+    .visual-card::before{
+      content:"";
+      position:absolute;
+      top:26px;
+      right:26px;
+      width:120px;
+      height:120px;
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(192,132,252,.25), transparent 70%);
+      filter:blur(18px);
+    }
+
+    .visual-inner{
+      width:100%;
+      border-radius:24px;
+      border:1px solid rgba(139,92,246,.18);
+      background:#0a0712;
+      padding:24px;
+    }
+
+    .mini-label{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:.76rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:#f5d0fe;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+    }
+
+    .visual-inner h2{
+      margin-top:18px;
+      font-size:2.2rem;
+      line-height:1.02;
+      text-transform:uppercase;
+      font-weight:900;
+      max-width:360px;
+    }
+
+    .visual-inner p{
+      margin-top:14px;
+      color:var(--muted);
+      line-height:1.8;
+      max-width:380px;
+    }
+
+    .price-box{
+      margin-top:22px;
+      display:grid;
+      gap:12px;
+    }
+
+    .price-card{
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+      padding:18px;
+    }
+
+    .price-card small{
+      display:block;
+      color:#e9d5ff;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-size:.72rem;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    .price-card strong{
+      display:block;
+      font-size:3rem;
+      line-height:1;
+      font-weight:900;
+    }
+
+    .section{
+      padding:34px 0;
+    }
+
+    .offer-shell{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:18px;
+      align-items:center;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border-radius:28px;
+      padding:28px;
+    }
+
+    .offer-shell h3{
+      font-size:2rem;
+      text-transform:uppercase;
+      line-height:1;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
+    .offer-shell p{
+      color:var(--muted);
+      line-height:1.8;
+      max-width:650px;
+    }
+
+    .offer-price{
+      font-size:3.2rem;
+      font-weight:900;
+      color:#fff;
+      text-align:right;
+    }
+
+    .offer-price small{
+      display:block;
+      font-size:.80rem;
+      color:#e9d5ff;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      margin-bottom:8px;
+    }
+
+    .contact-shell{
+      text-align:center;
+      border:1px solid rgba(139,92,246,.18);
+      background:linear-gradient(180deg, rgba(139,92,246,.12), rgba(255,255,255,.03));
+      border-radius:30px;
+      padding:34px 24px;
+      box-shadow:var(--glow);
+    }
+
+    .contact-shell h3{
+      font-size:clamp(2rem,4vw,3.4rem);
+      text-transform:uppercase;
+      line-height:.98;
+      font-weight:900;
+    }
+
+    .contact-shell p{
+      max-width:620px;
+      margin:16px auto 0;
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    .contact-actions{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:26px;
+    }
+
+    footer{
+      padding:36px 0 42px;
+      text-align:center;
+      color:rgba(255,255,255,.42);
+      font-size:.92rem;
+    }
+
+    [data-reveal]{opacity:0;transform:translateY(20px);transition:.7s ease}
+    [data-reveal].show{opacity:1;transform:translateY(0)}
+
+    @media (max-width: 980px){
+      .hero-grid,
+      .offer-shell{grid-template-columns:1fr}
+      .proof-row{grid-template-columns:1fr}
+      .offer-price{text-align:left}
+      .nav-links{display:none}
+      .visual-card{min-height:auto}
+    }
+
+    @media (max-width: 680px){
+      .container{width:min(calc(100% - 20px), var(--max))}
+      .hero{padding-top:44px}
+      .hero-shell{padding:24px}
+      .hero-actions,
+      .contact-actions{flex-direction:column}
+      .btn{width:100%}
+      .visual-inner h2{font-size:1.8rem}
+      .price-card strong{font-size:2.5rem}
+    }
+  </style>
 </head>
 <body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#accueil" class="brand">
+        <div class="brand-mark">AN</div>
+        <div class="brand-text">
+          <small>Atelier</small>
+          <strong>Numérique</strong>
+        </div>
+      </a>
 
-<div class="container">
+      <nav class="nav-links">
+        <a href="#offre">Offre</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-<!-- HERO -->
-<h1>
-Ton site ne donne pas envie de te payer.<br>
-<span class="highlight">Je change ça.</span>
-</h1>
+      <a href="#contact" class="btn btn-primary">Je veux mon site</a>
+    </div>
+  </header>
 
-<p>
-Je crée des sites simples, propres et premium qui donnent directement une image sérieuse et donnent envie de te contacter.
-</p>
+  <main id="accueil">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-shell">
+          <div class="hero-grid">
+            <div data-reveal>
+              <div class="eyebrow">Simple • premium • efficace</div>
 
-<a href="#contact" class="btn">Je veux mon site</a>
+              <h1>
+                un site <span class="gradient">clair</span><br>
+                qui donne envie<br>
+                de te <span class="gradient">choisir</span>
+              </h1>
 
-<!-- PROOF -->
-<div class="section">
-<div class="grid">
-<div class="card">Image plus pro</div>
-<div class="card">Plus de confiance</div>
-<div class="card">Plus de demandes</div>
-</div>
-</div>
+              <p class="lead">
+                Je crée des sites modernes, élégants et lisibles en quelques secondes. Le bon niveau de style, sans surcharge, pour donner directement une image pro et premium.
+              </p>
 
-<!-- OFFER -->
-<div class="section">
-<h2>Offre simple</h2>
-<div class="price">499€</div>
-<p>
-Une landing page premium, rapide, claire et pensée pour convertir.
-</p>
-</div>
+              <div class="hero-actions">
+                <a href="#contact" class="btn btn-primary">Je veux ce style</a>
+                <a href="https://instagram.com/TON_INSTAGRAM" target="_blank" class="btn btn-secondary">DM Instagram</a>
+              </div>
 
-<!-- CTA -->
-<div class="section" id="contact">
-<h2>Contact</h2>
-<p>
-DM Instagram ou email pour démarrer.
-</p>
-<a href="https://instagram.com/TON_INSTAGRAM" class="btn">DM Instagram</a>
-</div>
+              <div class="proof-row">
+                <div class="proof">
+                  <strong>Plus clair</strong>
+                  <span>On comprend tout en quelques secondes.</span>
+                </div>
+                <div class="proof">
+                  <strong>Plus premium</strong>
+                  <span>Une image plus propre, plus forte, plus crédible.</span>
+                </div>
+                <div class="proof">
+                  <strong>Plus efficace</strong>
+                  <span>Le visiteur sait directement quoi faire ensuite.</span>
+                </div>
+              </div>
+            </div>
 
-<footer>
-© Atelier Numérique
-</footer>
+            <div class="visual-card" data-reveal>
+              <div class="visual-inner">
+                <span class="mini-label">Landing premium</span>
+                <h2>moins de bruit. plus d’impact.</h2>
+                <p>
+                  Un design net, une hiérarchie forte, un message simple. Juste ce qu’il faut pour donner une vraie sensation de niveau.
+                </p>
 
-</div>
+                <div class="price-box">
+                  <div class="price-card">
+                    <small>À partir de</small>
+                    <strong>499€</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <section class="section" id="offre">
+      <div class="container">
+        <div class="offer-shell" data-reveal>
+          <div>
+            <h3>Offre simple</h3>
+            <p>
+              Une landing page premium, responsive, propre et prête à être utilisée pour tes prospects, tes DM et tes réseaux.
+            </p>
+          </div>
+          <div class="offer-price">
+            <small>Prix de départ</small>
+            499€
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-shell" data-reveal>
+          <h3>prêt à avoir un site plus fort ?</h3>
+          <p>
+            Écris-moi sur Instagram ou par email pour lancer ton projet.
+          </p>
+          <div class="contact-actions">
+            <a href="https://instagram.com/TON_INSTAGRAM" target="_blank" class="btn btn-primary">DM Instagram</a>
+            <a href="mailto:tonemail@example.com" class="btn btn-secondary">Envoyer un email</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Atelier Numérique
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>
