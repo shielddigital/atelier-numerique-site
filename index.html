@@ -735,6 +735,37 @@ body::before{
   border-radius:12px;
   display:block;
 }
+    .insta-float{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:999;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px 22px;
+  border-radius:18px;
+  font-weight:700;
+  color:#fff;
+  text-decoration:none;
+  background:linear-gradient(90deg, var(--purple-2), var(--purple-3));
+  box-shadow:0 12px 30px rgba(168,85,247,.28);
+  transition:.25s ease;
+}
+
+.insta-float:hover{
+  transform:translateY(-2px);
+}
+
+@media (max-width: 640px){
+  .insta-float{
+    right:16px;
+    bottom:16px;
+    padding:14px 18px;
+    border-radius:16px;
+    font-size:.95rem;
+  }
+}
   </style>
 </head>
 <body>
@@ -780,9 +811,7 @@ body::before{
 
           <div class="hero-actions">
             <a href="#offres" class="btn btn-primary">Voir les offres</a>
-           <a href="https://instagram.com/latelier_numerique_" target="_blank" class="btn secondary">
-  DM Instagram
-</a>
+            
           </div>
 
           <div class="mini-features">
@@ -1021,7 +1050,6 @@ body::before{
           <div class="contact-grid">
             <div class="contact-card">
               <h3>Coordonnées</h3>
-              <p><strong>Instagram :</strong> <a class="dm-link" href="https://instagram.com/latelier_numerique_" target="_blank">@latelier_numerique_</a></p>
               <p><strong>Email :</strong> tonemail@example.com</p>
               <p><strong>Réponse :</strong> rapide par DM ou email</p>
               <p><strong>Offre de départ :</strong> à partir de 499€</p>
@@ -1047,7 +1075,9 @@ body::before{
       © 2026 L'Atelier Numérique — Site moderne, responsive et prêt à convertir.
     </div>
   </footer>
-
+<a href="https://instagram.com/latelier_numerique_" target="_blank" class="insta-float">
+  Instagram
+</a>
 </body>
 </html>
 
